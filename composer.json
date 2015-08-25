@@ -1,0 +1,13 @@
+{
+    "name": "battis/data-utilities",
+    "description": "A handful of useful helper functions to process data",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Seth Battis",
+            "email": "sethbattis@stmarksschool.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
