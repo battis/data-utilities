@@ -24,7 +24,7 @@ class DataUtilities {
 		);
 		
 		$allCapsWords = array(
-			'i', 'ii', 'iii', 'iv', 'v', 'vi'	
+			'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv'	
 		);
 		
 		/* add a space after each piece of punctuation */
