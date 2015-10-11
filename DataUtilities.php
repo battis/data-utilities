@@ -24,7 +24,11 @@ class DataUtilities {
 		);
 		
 		$allCapsWords = array(
-			'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv'	
+			'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv', 'php', 'html'	
+		);
+		
+		$camelCaseWords = array(
+			'github' => 'GitHub'
 		);
 		
 		/* add a space after each piece of punctuation */
@@ -40,6 +44,8 @@ class DataUtilities {
 			
 			if (in_array($word, $allCapsWords)) {
 				$words[$key] = strtoupper($word);
+			} elseif (array_key_exists($word, $camelCaseWords)) {
+				$words[$key] = $camelCaseWords[$key];
 			} elseif ($key == 0 or !in_array($word, $lowerCaseWords)) {
 				$words[$key] = ucwords($word);
 			}
