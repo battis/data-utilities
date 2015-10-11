@@ -45,7 +45,7 @@ class DataUtilities {
 			if (in_array($word, $allCapsWords)) {
 				$words[$key] = strtoupper($word);
 			} elseif (array_key_exists($word, $camelCaseWords)) {
-				$words[$key] = $camelCaseWords[$key];
+				$words[$key] = $camelCaseWords[$word];
 			} elseif ($key == 0 or !in_array($word, $lowerCaseWords)) {
 				$words[$key] = ucwords($word);
 			}
