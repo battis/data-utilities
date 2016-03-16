@@ -11,6 +11,6 @@
 		<template name="responsive"/>
 	</transformation>
 	<files>
-		<directory>.</directory>
+		<directory>src</directory>
 	</files>
 </phpdoc>
