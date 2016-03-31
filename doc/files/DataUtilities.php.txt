@@ -16,7 +16,6 @@ class DataUtilities {
 	 * @see http://www.sitepoint.com/title-case-in-php/ SitePoint
 	 **/
 	public static function titleCase($title) {
-	
 		/* Our array of 'small words' which shouldn't be capitalised if they aren't the first word.  Add your own words to taste. */
 		$lowerCaseWords = array(
 			'of','a','the','and','an','or','nor','but','is','if','then','else','when',
@@ -102,6 +101,39 @@ class DataUtilities {
 		return $result;
 	}
 
+	/**
+	 * What portion of string `$a` and `$b` overlaps?
+	 *
+	 * For example if `$a` is `'abcdefg`` and `$b` is `'fgjkli'`, the overlapping
+	 * portion would be `'fg'`.
+	 * 
+	 * @param string $a
+	 * @param string $b
+	 * @param boolean $swap Attempt to swap `$a` and `$b` to find overlap. (default: `true`)
+	 * @return string Overlapping portion of `$a` and `$b`, `''` if no overlap
+	 */
+	public static function overlap($a, $b, $swap = true) {
+		if (!is_string($a) || !is_string($b)) {
+			return '';
+		}
+		
+		for($i = 0; $i < strlen($a); $i++) {
+			$overlap = true;
+			for($j = 0; $j < strlen($b) && $i + $j < strlen($a); $j++) {
+				if ($a[$i+$j] !== $b[$j]) {
+					$overlap = false;
+					break;
+				}
+			}
+			if ($overlap) {
+				return substr($a, $i);
+			}
+		}
+		if ($swap) {
+			return static::overlap($b, $a, false);
+		}
+		return '';
+	}
 }
 	
 ?>
