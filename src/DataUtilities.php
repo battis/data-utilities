@@ -126,13 +126,50 @@ class DataUtilities {
 				}
 			}
 			if ($overlap) {
-				return substr($a, $i);
+				return substr($a, $i, $j);
 			}
 		}
 		if ($swap) {
 			return static::overlap($b, $a, false);
 		}
 		return '';
+	}
+	
+	/**
+	 * Generate a URL from a path
+	 * 
+	 * @param string $path A valid file path
+	 * @param string[] $vars Optional (default: `$_SERVER` unless run from CLI, in
+	 *		which case the method fails without this parameter). Array must have keys
+	 *		HTTPS, SERVER_NAME, CONTEXT_PREFIX, CONTEXT_DOCUMENT_ROOT.
+	 * @return string|boolean The URL to that path, or `false` if the URl cannot be
+	 *		computed (e.g. if run from CLI)
+	 */
+	public static function URLfromPath($path, array $vars = null) {
+		if ($vars === null) {
+			if(php_sapi_name() != 'cli') {
+				$vars = $_SERVER;
+			} else {
+				return false;
+			}
+		}
+		
+		if (realpath($path)) {
+			return (!isset($vars['HTTPS']) || $vars['HTTPS'] != 'on' ?
+		                'http://' :
+		                'https://'
+		        ) .
+		        $vars['SERVER_NAME'] .
+		        $vars['CONTEXT_PREFIX'] .
+		        str_replace(
+			        $vars['CONTEXT_DOCUMENT_ROOT'],
+			        '',
+			        $path
+		        );
+	
+		} else {
+			return false;
+		}
 	}
 }
 	

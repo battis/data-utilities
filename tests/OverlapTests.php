@@ -2,7 +2,7 @@
 	
 use Battis\DataUtilities;
 	
-class OverlapTest extends PHPUnit_Framework_TestCase {
+class OverlapTests extends PHPUnit_Framework_TestCase {
 
 	public function testOverlapLeftRight() {
 		$a = 'abcdef';
@@ -26,6 +26,14 @@ class OverlapTest extends PHPUnit_Framework_TestCase {
 
 		// reversed use case, no swapping
 		$this->assertEquals('', DataUtilities::overlap($b, $a, false));
+	}
+	
+	public function testInternalOverlap() {
+		$a = 'abcdef';
+		$b = 'cde';
+		
+		// internal overlap
+		$this->assertEquals('cde', DataUtilities::overlap($a, $b));
 	}
 
 	public function testNoOverlap() {
