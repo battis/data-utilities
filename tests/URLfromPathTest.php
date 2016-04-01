@@ -20,7 +20,7 @@ class URLfromPathTests extends PHPUnit_Framework_TestCase {
 			'CONTEXT_DOCUMENT_ROOT' => dirname(dirname(dirname(dirname(__FILE__))))
 		);
 		
-		$this->assertEquals('https://data-utilities.phpunit.de/battis/data-utilities/tests/URLfromPathTests.php', DataUtilities::URLfromPath($path, $server));
+		$this->assertEquals('https://data-utilities.phpunit.de/battis/data-utilities/tests/URLfromPathTest.php', DataUtilities::URLfromPath($path, $server));
 	}
 	
 	public function testUserWebFolder() {
@@ -32,6 +32,6 @@ class URLfromPathTests extends PHPUnit_Framework_TestCase {
 			'CONTEXT_DOCUMENT_ROOT' => dirname(dirname(dirname(dirname(__FILE__))))
 		);
 		
-		$this->assertEquals('https://data-utilities.phpunit.de/~foo/battis/data-utilities/tests/URLfromPathTests.php', DataUtilities::URLfromPath($path, $server));
+		$this->assertEquals('https://data-utilities.phpunit.de/~foo/battis/data-utilities/tests/URLfromPathTest.php', DataUtilities::URLfromPath($path, $server));
 	}
 }
