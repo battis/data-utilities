@@ -142,7 +142,7 @@ class DataUtilities {
 	 * @param string[] $vars Optional (default: `$_SERVER` unless run from CLI, in
 	 *		which case the method fails without this parameter). Array must have keys
 	 *		HTTPS, SERVER_NAME, CONTEXT_PREFIX, CONTEXT_DOCUMENT_ROOT.
-	 * @return string|boolean The URL to that path, or `false` if the URl cannot be
+	 * @return false|string The URL to that path, or `false` if the URl cannot be
 	 *		computed (e.g. if run from CLI)
 	 */
 	public static function URLfromPath($path, array $vars = null) {
