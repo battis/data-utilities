@@ -188,7 +188,7 @@ class DataUtilities
      */
     public static function URLexists($url)
     {
-        $headers = get_headers($theURL);
+        $headers = get_headers($url);
         return intval(substr($headers[0], 9, 3)) < 400;
     }
 }
