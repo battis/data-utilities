@@ -27,11 +27,15 @@ class DataUtilities
         );
 
         $allCapsWords = array(
-            'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv', 'php', 'html'
+            'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv', 'php', 'html', 'lti'
         );
 
         $camelCaseWords = array(
             'github' => 'GitHub'
+        );
+
+        $spaceEquivalents = array(
+            '\s', '_'
         );
 
         /* add a space after each piece of punctuation */
@@ -41,7 +45,7 @@ class DataUtilities
         // TODO superscripts for 1st, 2nd, 3rd
 
         /* Split the string into separate words */
-        $words = explode(' ', $title);
+        $words = preg_split('/[' . implode('', $spaceEquivalents) . ']+/', $title, -1, PREG_SPLIT_NO_EMPTY);
 
         foreach ($words as $key => $word) {
             if (in_array($word, $allCapsWords)) {
