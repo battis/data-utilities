@@ -1,42 +1,76 @@
 <?php
-
 /** DataUtilities and related classes */
 
 namespace Battis;
 
+/**
+ * A collection of generally useful little hacks and tweaks for working with
+ * string data.
+ *
+ * @author Seth Battis <seth@battis.net>
+ */
 class DataUtilities
 {
+    /**
+     * Append the src[key] array to the dest array, if key is present
+     * @param array $src
+     * @param string $key
+     * @param array $dest
+     * @return array
+     */
+    private static function appendIfPresent($src, $key, $dest)
+    {
+        if (!empty($src[$key])) {
+            return array_merge($dest, $src[$key]);
+        } else {
+            return $dest;
+        }
+    }
+
     /**
      * Converts $title to Title Case, and returns the result
      *
      * @param string $title
+     * @param array $params An associative array of additional special cases,
+     *                      e.g. (with any subset of the keys below)
+     *                      ```
+     * [
+     *     'lowerCaseWords' => ['foo', 'bar'],
+     *     'allCapsWords' => ['BAZ'],
+     *     'camelCaseWords' => ['foobarbaz' => 'fooBarBaz'],
+     *     'spaceEquivalents' => ['\t']
+     * ]
+     * ```
      *
      * @return string
      *
      * @see http://www.sitepoint.com/title-case-in-php/ SitePoint
      **/
-    public static function titleCase($title)
+    public static function titleCase($title, $params = [])
     {
         /*
          * Our array of 'small words' which shouldn't be capitalised if they
          * aren't the first word.  Add your own words to taste.
          */
-        $lowerCaseWords = array(
-            'of','a','the','and','an','or','nor','but','is','if','then','else','when',
-            'at','from','by','on','off','for','in','out','over','to','into','with'
-        );
+        $lowerCaseWords = static::appendIfPresent($params, 'lowerCaseWords', [
+            'of','a','the','and','an','or','nor','but','is','if','then','else',
+            'when','at','from','by','on','off','for','in','out','over','to',
+            'into','with'
+        ]);
+        var_dump($lowerCaseWords);
 
-        $allCapsWords = array(
-            'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv', 'php', 'html', 'lti'
-        );
+        $allCapsWords = static::appendIfPresent($params, 'allCapsWords', [
+            'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv', 'php', 'html',
+            'lti'
+        ]);
 
-        $camelCaseWords = array(
+        $camelCaseWords = static::appendIfPresent($params, 'camelCaseWords', [
             'github' => 'GitHub'
-        );
+        ]);
 
-        $spaceEquivalents = array(
+        $spaceEquivalents = static::appendIfPresent($params, 'spaceEquivalents', [
             '\s', '_'
-        );
+        ]);
 
         /* add a space after each piece of punctuation */
         $title = preg_replace('/([^a-z0-9])\s*/i', '$1 ', strtolower($title));

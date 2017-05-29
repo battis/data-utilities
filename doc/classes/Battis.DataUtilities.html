@@ -114,7 +114,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">1</span>
+                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -144,19 +144,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-405873480"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1493068647"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-405873480" class="accordion-body collapse in">
+            <div id="namespace-1493068647" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1876986792"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-101860124"></a>
                                 <a href="../namespaces/Battis.html" style="margin-left: 30px; padding-left: 0">Battis</a>
             </div>
-            <div id="namespace-1876986792" class="accordion-body collapse ">
+            <div id="namespace-101860124" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -188,7 +188,8 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\Battis</small>DataUtilities</h1>
-                    <p><em></em></p>
+                    <p><em>A collection of generally useful little hacks and tweaks for working with
+string data.</em></p>
                     
                     
                                         
@@ -233,7 +234,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/Battis.DataUtilities.html#method_appendIfPresent" class="">appendIfPresent()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -264,7 +265,14 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Seth Battis <a href="mailto:seth@battis.net">seth@battis.net</a></p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -283,7 +291,7 @@
             <article class="method">
                 <h3 class="public ">titleCase()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">titleCase(string  <span class="argument">$title</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">titleCase(string  <span class="argument">$title</span>, array  <span class="argument">$params = array()</span>) : string</pre>
                 <p><em>Converts $title to Title Case, and returns the result</em></p>
                 
 
@@ -293,6 +301,18 @@
                                 <td>string</td>
                                 <td>$title </td>
                                 <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$params </td>
+                                <td><p>An associative array of additional special cases,
+e.g. (with any subset of the keys below)</p>
+<pre><code>[
+    'lowerCaseWords' =&gt; ['foo', 'bar'],
+    'allCapsWords' =&gt; ['BAZ'],
+    'camelCaseWords' =&gt; ['foobarbaz' =&gt; 'fooBarBaz'],
+    'spaceEquivalents' =&gt; ['\t']
+]</code></pre></td>
                             </tr>
                                             </table>
                 
@@ -414,7 +434,7 @@
             <article class="method">
                 <h3 class="public ">URLfromPath()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">URLfromPath(string  <span class="argument">$path</span>, array&lt;mixed,string&gt;  <span class="argument">$vars = null</span>) : false|string</pre>
+                <pre class="signature" style="margin-right: 54px;">URLfromPath(string  <span class="argument">$path</span>, array&lt;mixed,string&gt;  <span class="argument">$vars = null</span>, string|false  <span class="argument">$basePath = false</span>) : false|string</pre>
                 <p><em>Generate a URL from a path</em></p>
                 
 
@@ -429,8 +449,14 @@
                                 <td>array&lt;mixed,string&gt;</td>
                                 <td>$vars </td>
                                 <td><p>Optional (default: <code>$_SERVER</code> unless run from CLI,
-in which case the method fails without this parameter). Array must
-have keys <code>HTTPS, SERVER_NAME, CONTEXT_PREFIX, CONTEXT_DOCUMENT_ROOT</code>.</p></td>
+in which case the method fails without this
+parameter). Array must have keys <code>HTTPS, SERVER_NAME, CONTEXT_PREFIX, CONTEXT_DOCUMENT_ROOT</code>.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|false</td>
+                                <td>$basePath </td>
+                                <td><p>The base path from which to start when
+processing a relative path.</p></td>
                             </tr>
                                             </table>
                 
@@ -492,7 +518,54 @@ be computed (e.g. if run from CLI)</p>
         </aside>
     </div>
 
-                                                                    </div>
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_appendIfPresent" name="method_appendIfPresent" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">appendIfPresent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">appendIfPresent(array  <span class="argument">$src</span>, string  <span class="argument">$key</span>, array  <span class="argument">$dest</span>) : array</pre>
+                <p><em>Append the src[key] array to the dest array, if key is present</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$src </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$key </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$dest </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -542,9 +615,7 @@ be computed (e.g. if run from CLI)</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on 
-Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in phar:///usr/local/bin/phpdoc/vendor/twig/twig/lib/Twig/Extension/Core.php on line 89
-October 9th, 2016 at 18:59.
+                    on May 29th, 2017 at 14:17.
                 </section>
             </section>
         </section>

@@ -31,4 +31,18 @@ class TitleCaseTest extends TestCase
         // expected use case
         $this->assertEquals('Explode This One!', DataUtilities::titleCase($a));
     }
+
+    public function testParams()
+    {
+        $a = 'the great-Reginald-perCival-of-hOgWaRts';
+        $params = [
+            'lowerCaseWords' => ['reginald'],
+            'allCapsWords' => ['percival'],
+            'camelCaseWords' => ['hogwarts' => 'HogWarts'],
+            'spaceEquivalents' => ['-']
+        ];
+
+        // expected use classes
+        $this->assertEquals('The Great reginald PERCIVAL of HogWarts', DataUtilities::titleCase($a, $params));
+    }
 }
