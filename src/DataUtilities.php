@@ -52,23 +52,22 @@ class DataUtilities
          * Our array of 'small words' which shouldn't be capitalised if they
          * aren't the first word.  Add your own words to taste.
          */
-        $lowerCaseWords = static::appendIfPresent($params, 'lowerCaseWords', [
+        $lowerCaseWords = self::appendIfPresent($params, 'lowerCaseWords', [
             'of','a','the','and','an','or','nor','but','is','if','then','else',
             'when','at','from','by','on','off','for','in','out','over','to',
             'into','with'
         ]);
-        var_dump($lowerCaseWords);
 
-        $allCapsWords = static::appendIfPresent($params, 'allCapsWords', [
+        $allCapsWords = self::appendIfPresent($params, 'allCapsWords', [
             'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv', 'php', 'html',
             'lti'
         ]);
 
-        $camelCaseWords = static::appendIfPresent($params, 'camelCaseWords', [
+        $camelCaseWords = self::appendIfPresent($params, 'camelCaseWords', [
             'github' => 'GitHub'
         ]);
 
-        $spaceEquivalents = static::appendIfPresent($params, 'spaceEquivalents', [
+        $spaceEquivalents = self::appendIfPresent($params, 'spaceEquivalents', [
             '\s', '_'
         ]);
 
@@ -203,9 +202,7 @@ class DataUtilities
 
         if ($basePath !== false && substr($path, 0, 1) !== '/') {
             $basePath = rtrim($basePath, '/');
-            var_dump("$basePath/$path");
             $path = realpath("$basePath/$path");
-            var_dump($path);
         }
 
         if (realpath($path)) {
