@@ -46,4 +46,21 @@ class URLfromPathTests extends TestCase
             DataUtilities::URLfromPath($path, $server)
         );
     }
+
+    public function testBasePath()
+    {
+        $path = '../tests/' . basename(__FILE__);
+        $server = array(
+            'HTTPS' => 'on',
+            'SERVER_NAME' => 'data-utilities.phpunit.de',
+            'CONTEXT_PREFIX' => '',
+            'CONTEXT_DOCUMENT_ROOT' => dirname(dirname(dirname(dirname(__FILE__))))
+        );
+        $basePath = dirname(__DIR__) . '/src/';
+
+        $this->assertEquals(
+            'https://data-utilities.phpunit.de/battis/data-utilities/tests/URLfromPathTest.php',
+            DataUtilities::URLfromPath($path, $server, $basePath)
+        );
+    }
 }

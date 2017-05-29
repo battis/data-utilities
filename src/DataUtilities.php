@@ -148,13 +148,16 @@ class DataUtilities
      *
      * @param string $path A valid file path
      * @param string[] $vars Optional (default: `$_SERVER` unless run from CLI,
-     *     in which case the method fails without this parameter). Array must
-     *     have keys `HTTPS, SERVER_NAME, CONTEXT_PREFIX,
-     *     CONTEXT_DOCUMENT_ROOT`.
+     *                       in which case the method fails without this
+     *                       parameter). Array must have keys `HTTPS,
+     *                       SERVER_NAME, CONTEXT_PREFIX,
+     *                       CONTEXT_DOCUMENT_ROOT`.
+     * @param string|false $basePath The base path from which to start when
+     *                               processing a relative path.
      * @return false|string The URL to that path, or `false` if the URl cannot
      *     be computed (e.g. if run from CLI)
      */
-    public static function URLfromPath($path, array $vars = null)
+    public static function URLfromPath($path, array $vars = null, $basePath = false)
     {
         if ($vars === null) {
             if (php_sapi_name() != 'cli') {
@@ -162,6 +165,13 @@ class DataUtilities
             } else {
                 return false;
             }
+        }
+
+        if ($basePath !== false && substr($path, 0, 1) !== '/') {
+            $basePath = rtrim($basePath, '/');
+            var_dump("$basePath/$path");
+            $path = realpath("$basePath/$path");
+            var_dump($path);
         }
 
         if (realpath($path)) {
