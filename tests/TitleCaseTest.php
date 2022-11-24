@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Battis\DataUtilities;
+use Battis\DataUtilities\Text;
 use PHPUnit\Framework\TestCase;
 
 class TitleCaseTest extends TestCase
@@ -13,7 +13,7 @@ class TitleCaseTest extends TestCase
         $a = 'this is a test of the emergency broadcast system';
 
         // expected use case
-        $this->assertEquals('This is a Test of the Emergency Broadcast System', DataUtilities::titleCase($a));
+        $this->assertEquals('This is a Test of the Emergency Broadcast System', Text::titleCase($a));
     }
 
     public function testCamelCaseWords()
@@ -21,7 +21,7 @@ class TitleCaseTest extends TestCase
         $a = 'Does github end up correct?';
 
         // expected use case
-        $this->assertEquals('Does GitHub End Up Correct?', DataUtilities::titleCase($a));
+        $this->assertEquals('Does GitHub End Up Correct?', Text::titleCase($a));
     }
 
     public function testUnderscores()
@@ -29,7 +29,7 @@ class TitleCaseTest extends TestCase
         $a = 'explode_this_one!';
 
         // expected use case
-        $this->assertEquals('Explode This One!', DataUtilities::titleCase($a));
+        $this->assertEquals('Explode This One!', Text::titleCase($a));
     }
 
     public function testParams()
@@ -43,6 +43,6 @@ class TitleCaseTest extends TestCase
         ];
 
         // expected use classes
-        $this->assertEquals('The Great reginald PERCIVAL of HogWarts', DataUtilities::titleCase($a, $params));
+        $this->assertEquals('The Great reginald PERCIVAL of HogWarts', Text::titleCase($a, $params));
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Battis\DataUtilities;
+use Battis\DataUtilities\Text;
 use PHPUnit\Framework\TestCase;
 use DateTime;
 
@@ -15,7 +15,7 @@ class OverlapTests extends TestCase
         $b = 'defghi';
 
         // expected use case
-        $this->assertEquals('def', DataUtilities::overlap($a, $b));
+        $this->assertEquals('def', Text::overlap($a, $b));
     }
 
     public function testOverlapRightLeft()
@@ -24,7 +24,7 @@ class OverlapTests extends TestCase
         $b = 'defghi';
 
         // reversed use case
-        $this->assertEquals('def', DataUtilities::overlap($b, $a));
+        $this->assertEquals('def', Text::overlap($b, $a));
     }
 
     public function testOverlapRightLeftWithoutSwap()
@@ -33,7 +33,7 @@ class OverlapTests extends TestCase
         $b = 'defghi';
 
         // reversed use case, no swapping
-        $this->assertEquals('', DataUtilities::overlap($b, $a, false));
+        $this->assertEquals('', Text::overlap($b, $a, false));
     }
 
     public function testInternalOverlap()
@@ -42,7 +42,7 @@ class OverlapTests extends TestCase
         $b = 'cde';
 
         // internal overlap
-        $this->assertEquals('cde', DataUtilities::overlap($a, $b));
+        $this->assertEquals('cde', Text::overlap($a, $b));
     }
 
     public function testNoOverlap()
@@ -52,7 +52,7 @@ class OverlapTests extends TestCase
         $d = new DateTime();
 
         // no overlap present
-        $this->assertEquals('', DataUtilities::overlap($a, $c));
+        $this->assertEquals('', Text::overlap($a, $c));
     }
 
     public function testNonstring()
@@ -61,6 +61,6 @@ class OverlapTests extends TestCase
         $d = new DateTime();
 
         // non-string argument
-        $this->assertEquals('', DataUtilities::overlap($a, $d));
+        $this->assertEquals('', Text::overlap($a, $d));
     }
 }

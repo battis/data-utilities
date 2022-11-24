@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26240ac44e89b6964841a2f5972c1801",
-    "packages": [],
+    "content-hash": "fe2eb30e783f78859a1f67d9d2e430a0",
+    "packages": [
+        {
+            "name": "battis/hydratable",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/battis/hydratable.git",
+                "reference": "a9715a041473e48bd4a5c71881f9f6fab07e3fc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/battis/hydratable/zipball/a9715a041473e48bd4a5c71881f9f6fab07e3fc5",
+                "reference": "a9715a041473e48bd4a5c71881f9f6fab07e3fc5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Battis\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "seth@battis.net"
+                }
+            ],
+            "description": "Hydrate serialized objects with defaults and overrides",
+            "support": {
+                "issues": "https://github.com/battis/hydratable/issues",
+                "source": "https://github.com/battis/hydratable/tree/main"
+            },
+            "time": "2022-11-24T17:06:25+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -1750,7 +1792,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "battis/hydratable": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
