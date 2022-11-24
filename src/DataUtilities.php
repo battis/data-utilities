@@ -74,9 +74,6 @@ class DataUtilities
         /* add a space after each piece of punctuation */
         $title = preg_replace('/([^a-z0-9])\s*/i', '$1 ', strtolower($title));
 
-        // TODO smart em- and en-dashes
-        // TODO superscripts for 1st, 2nd, 3rd
-
         /* Split the string into separate words */
         $words = preg_split('/[' . implode('', $spaceEquivalents) . ']+/', $title, -1, PREG_SPLIT_NO_EMPTY);
 
