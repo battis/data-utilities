@@ -79,7 +79,7 @@ class Text
     /**
      * What portion of string `$a` and `$b` overlaps?
      *
-     * For example if `$a` is `'abcdefg`` and `$b` is `'fgjkli'`, the overlapping
+     * For example if `$a` is `'abcdefg'` and `$b` is `'fgjkli'`, the overlapping
      * portion would be `'fg'`.
      *
      * @param string $a
@@ -111,6 +111,11 @@ class Text
         return '';
     }
 
+    /**
+     * TODO document snake_case_to_PascalCase
+     * @param string $snake_case
+     * @return string
+     */
     public static function snake_case_to_PascalCase(string $snake_case): string
     {
         return join(
@@ -122,6 +127,11 @@ class Text
         );
     }
 
+    /**
+     * TODO document camelCase_to_snake_case
+     * @param string $camelCase
+     * @return string
+     */
     public static function camelCase_to_snake_case(string $camelCase): string
     {
         $snake_case = $camelCase;
@@ -139,6 +149,11 @@ class Text
         return strtolower($snake_case);
     }
 
+    /**
+     * TODO document pluralize
+     * @param string $singular
+     * @return string
+     */
     public static function pluralize(string $singular): string
     {
         switch (substr($singular, -1)) {
