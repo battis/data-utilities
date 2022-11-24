@@ -32,22 +32,22 @@ class Text
          * Our array of 'small words' which shouldn't be capitalized if they
          * aren't the first word.  Add your own words to taste.
          */
-        $lowerCaseWords = $hydrate($params['lowerCaseWords'],[
+        $lowerCaseWords = $hydrate($params['lowerCaseWords'] ?? [], [
             'of','a','the','and','an','or','nor','but','is','if','then','else',
             'when','at','from','by','on','off','for','in','out','over','to',
             'into','with'
         ]);
 
-        $allCapsWords = $hydrate($params['allCapsWords'], [
+        $allCapsWords = $hydrate($params['allCapsWords'] ?? [], [
             'i', 'ii', 'iii', 'iv', 'v', 'vi', 'sis', 'csv', 'php', 'html',
             'lti'
         ]);
 
-        $camelCaseWords = $hydrate($params['camelCaseWords'], [
+        $camelCaseWords = $hydrate($params['camelCaseWords'] ?? [], [
             'github' => 'GitHub'
         ]);
 
-        $spaceEquivalents = $hydrate($params['spaceEquivalents'], [
+        $spaceEquivalents = $hydrate($params['spaceEquivalents'] ?? [], [
             '\s', '_'
         ]);
 

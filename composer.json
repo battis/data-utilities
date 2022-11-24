@@ -18,6 +18,6 @@
         }
     },
     "require": {
-        "battis/hydratable": "dev-main"
+        "battis/hydratable": "^0.1"
     }
 }

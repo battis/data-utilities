@@ -1,0 +1,9 @@
+{
+  "actions" : {
+    "run" : {
+      "enabled" : true,
+      "script" : ".\/vendor\/bin\/phpunit"
+    }
+  },
+  "openLogOnRun" : "start"
+}

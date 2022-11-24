@@ -4,26 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe2eb30e783f78859a1f67d9d2e430a0",
+    "content-hash": "538f1337fe970f15a14548ce45ef9f97",
     "packages": [
         {
             "name": "battis/hydratable",
-            "version": "dev-main",
+            "version": "v0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/battis/hydratable.git",
-                "reference": "a9715a041473e48bd4a5c71881f9f6fab07e3fc5"
+                "reference": "b3f85b98f69691defc913104dac5e84a77da1fdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/battis/hydratable/zipball/a9715a041473e48bd4a5c71881f9f6fab07e3fc5",
-                "reference": "a9715a041473e48bd4a5c71881f9f6fab07e3fc5",
+                "url": "https://api.github.com/repos/battis/hydratable/zipball/b3f85b98f69691defc913104dac5e84a77da1fdd",
+                "reference": "b3f85b98f69691defc913104dac5e84a77da1fdd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -43,9 +42,9 @@
             "description": "Hydrate serialized objects with defaults and overrides",
             "support": {
                 "issues": "https://github.com/battis/hydratable/issues",
-                "source": "https://github.com/battis/hydratable/tree/main"
+                "source": "https://github.com/battis/hydratable/tree/v0.1"
             },
-            "time": "2022-11-24T17:06:25+00:00"
+            "time": "2022-11-24T17:49:34+00:00"
         }
     ],
     "packages-dev": [
@@ -1792,9 +1791,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "battis/hydratable": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
