@@ -77,7 +77,7 @@ class Text
     }
 
     /**
-     * What portion of string `$a` and `$b` overlaps?
+     * What portion of string `$a` and `$b` overlap with each other?
      *
      * For example if `$a` is `'abcdefg'` and `$b` is `'fgjkli'`, the overlapping
      * portion would be `'fg'`.
@@ -112,9 +112,9 @@ class Text
     }
 
     /**
-     * TODO document snake_case_to_PascalCase
-     * @param string $snake_case
-     * @return string
+     * Convert a string from snake_case to PascalCase
+     * @param string $snake_case original string (presumed to be in snake_case)
+     * @return string PascalCase version of the string
      */
     public static function snake_case_to_PascalCase(string $snake_case): string
     {
@@ -128,8 +128,14 @@ class Text
     }
 
     /**
-     * TODO document camelCase_to_snake_case
-     * @param string $camelCase
+     * Convert a string from camelCase to snake_case
+     *
+     * Word breaks are assumed to be indicated by changes in case, so
+     * `fooBarBaz` will become `foo_bar_baz`, but `fooBARBaz` will _also_
+     * become `foo_bar_baz`
+     *
+     * @param string $camelCase original string (presumed to be in
+     *                          camelCase -- or PascalCase)
      * @return string
      */
     public static function camelCase_to_snake_case(string $camelCase): string
@@ -150,7 +156,44 @@ class Text
     }
 
     /**
-     * TODO document pluralize
+     * Is this a vowel?
+     *
+     * The string is processed case-insensitively, and by default `y` is a
+     * vowel. To exclude `y` pass `false` as `$sometimesY` argument.
+     * Multi-character strings will never be vowels.
+     *
+     * @param string $char the string to check (ideally a single character)
+     * @param bool $sometimesY (Optional, default is `TRUE`)
+     * @return bool
+     */
+    public static function isVowel(string $char, bool $sometimesY = true): bool
+    {
+        switch (strtolower($char)) {
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+            case 'u':
+                return true;
+            case 'y':
+                return $sometimesY;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Pluralize a singular word
+     *
+     * This uses assumptions based on the English language and its
+     * pluralization "rules" (e.g. words end in `ch`, `s`, `sh`, `x`, and
+     * `z` will be pluralized by adding `es` rather than `s` and words
+     * ending in a consonant + `y` will be pluralized by changing the `y`
+     * to `ies`, as in `lazy` becomes `lazies`, while `day` should become
+     * `days`). The pluralization matches the last character (or character
+     * group) that is used to determine the pluralizing suffix (so `fisH`
+     * would become `fisHES` while `FISh` would become `FIShes`).
+     *
      * @param string $singular
      * @return string
      */
@@ -164,10 +207,16 @@ class Text
             case "S":
             case "X":
             case "Z":
-                return "{$singular}ES";
+                return "{$singular}ES"; // TODO dry out this code somehow
             case "y":
+                if (self::isVowel(substr($singular, -2, 1))) {
+                    return "{$singular}s";
+                }
                 return substr($singular, 0, strlen($singular) - 1) . "ies";
             case "Y":
+                if (self::isVowel(substr($singular, -2, 1))) {
+                    return "{$singular}S";
+                }
                 return substr($singular, 0, strlen($singular) - 1) . "IES";
             default:
                 switch (substr($singular, -2)) {

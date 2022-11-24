@@ -84,6 +84,10 @@ class TextTest extends TestCase
                 "RITZ" => "RITZES",
                 "ritZ" => "ritZES",
                 "RITz" => "RITzes",
+                "day" => 'days',
+                'DAY' => 'DAYS',
+                'daY' => 'daYS',
+                'DAy' => 'DAys'
             ]
             as $arg => $expected
         ) {
