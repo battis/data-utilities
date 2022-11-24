@@ -39,9 +39,9 @@ class URL
                         'https://'
                 ) .
                 $vars['SERVER_NAME'] .
-                $vars['CONTEXT_PREFIX'] .
+                $vars['CONTEXT_PREFIX'] ?? '' .
                 str_replace(
-                    $vars['CONTEXT_DOCUMENT_ROOT'],
+                    $vars['CONTEXT_DOCUMENT_ROOT'] ?? '',
                     '',
                     $path
                 );
