@@ -10,7 +10,7 @@ trait FixturePath
 
     protected function initFixturePath(string $path = null) {
         if ($path === null) {
-            $path = (new ReflectionClass(self::class))->getFileName();
+            $path = (new ReflectionClass(static::class))->getFileName();
             $path = preg_replace('@^(.*' . DIRECTORY_SEPARATOR . 'tests)(' . DIRECTORY_SEPARATOR . '.*)$$@', '$1/Fixtures$2', $path);
             $path = dirname($path) . DIRECTORY_SEPARATOR . basename($path, '.php');
         }
@@ -27,6 +27,9 @@ trait FixturePath
 
     final protected function getPathToFixture(string $pathToFileRelativeToFixturePath): string
     {
+        if (substr($pathToFileRelativeToFixturePath, 0, 1) === DIRECTORY_SEPARATOR) {
+            return $pathToFileRelativeToFixturePath;
+        }
         return $this->getFixturePath() . DIRECTORY_SEPARATOR . $pathToFileRelativeToFixturePath;
     }
 }

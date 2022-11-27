@@ -2,30 +2,46 @@
 
 namespace Battis\DataUtilities\Tests\PHPUnit;
 
-use Battis\DataUtilities\PHPUnit\FixturePath;
+use Battis\DataUtilities\Tests\Fixtures\PHPUnit\FixturePathTest\A;
+use Battis\DataUtilities\Tests\Fixtures\PHPUnit\FixturePathTest\B;
 use PHPUnit\Framework\TestCase;
 
 class FixturePathTest extends TestCase
 {
-    use FixturePath;
-
     public function testInitFixturePath() {
-        $this->initFixturePath('foo');
-        $this->assertEquals('foo/bar', $this->getPathToFixture('bar'));
+        $values = [
+            ['foo', 'bar', 'foo/bar'],
+            [realpath(__DIR__ . '/..') . '/baz', 'test', realpath(__DIR__ . '/..') . '/baz/test'],
+            [null, 'test', realpath(__DIR__ . '/..') . '/Fixtures/Fixtures/PHPUnit/FixturePathTest/A/test']
+        ];
 
-        $dir = realpath(__DIR__ . '/..') . '/baz';
-        $this->initFixturePath($dir);
-        $this->assertEquals($dir . '/test', $this->getPathToFixture('test'));
+        foreach ($values as list($initArg, $getArg, $expected)) {
+            $a = new A();
+            if ($initArg === null) {
+                $a->fixtureInitFixturePath();
+            } else {
+                $a->fixtureInitFixturePath($initArg);
+            }
+            $this->assertEquals($expected, $a->fixtureGetPathToFixture($getArg));
+        }
 
-        $dir = realpath(__DIR__ . '/..') . '/Fixtures/PHPUnit/FixturePathTest';
-        $this->initFixturePath();
-        $this->assertEquals($dir . '/test', $this->getPathToFixture('test'));
+        $b = new B();
+        $this->assertEquals(realpath(__DIR__ . '/..') . '/Fixtures/Fixtures/PHPUnit/FixturePathTest/B/test', $b->fixtureGetPathToFixture('test'));
     }
 
     public function testGetFixturePath() {
-        $base = str_replace('/@@@', '', $this->getPathToFixture('@@@'));
-        $this->assertEquals($base . '/test', $this->getPathToFixture('test'));
-        $this->assertEquals($base . '/test.php', $this->getPathToFixture('test.php'));
-        $this->assertEquals($base . '/foo/bar/baz.php', $this->getPathToFixture('foo/bar/baz.php'));
+        $a = new A();
+        $base = str_replace('/@@@', '', $a->fixtureGetPathToFixture('@@@'));
+
+        $values = [
+            ['test', $base . '/test'],
+            ['test.php', $base . '/test.php'],
+            ['foo/bar/baz.php', $base . '/foo/bar/baz.php'],
+            ['/foo/bar.php', '/foo/bar.php']
+        ];
+
+        foreach ($values as list($arg, $expected)) {
+            $this->assertEquals($expected, $a->fixtureGetPathToFixture($arg));
+        }
     }
 }

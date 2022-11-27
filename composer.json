@@ -14,7 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Battis\\DataUtilities\\": "src/"
+            "Battis\\DataUtilities\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Battis\\DataUtilities\\Tests\\": "tests"
         }
     },
     "require": {
