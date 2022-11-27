@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "538f1337fe970f15a14548ce45ef9f97",
+    "content-hash": "2e9b21379224e14851478ec346b3b98d",
     "packages": [
         {
             "name": "battis/hydratable",
