@@ -8,25 +8,16 @@ class URL
      * Generate a URL from a path
      *
      * @param string $path A valid file path
-     * @param string[] $vars Optional (default: `$_SERVER` unless run from CLI,
-     *                       in which case the method fails without this
-     *                       parameter). Array must have keys `HTTPS,
-     *                       SERVER_NAME, CONTEXT_PREFIX,
-     *                       CONTEXT_DOCUMENT_ROOT`.
      * @param string|false $basePath The base path from which to start when
      *                               processing a relative path.
-     * @return false|string The URL to that path, or `false` if the URl cannot
+     * @return false|string The URL to that path, or `false` if the URL cannot
      *     be computed (e.g. if run from CLI)
+     * @deprecated 1.1.2 No longer tested, and appears to be oriented towards
+     *     a particular version of Apache running on Ubuntu
      */
-    public static function fromPath($path, array $vars = null, $basePath = false)
+    public static function fromPath($path, $basePath = false)
     {
-        if ($vars === null) {
-            if (php_sapi_name() != 'cli') {
-                $vars = $_SERVER;
-            } else {
-                return false;
-            }
-        }
+        global $_SERVER;
 
         if ($basePath !== false && substr($path, 0, 1) !== '/') {
             $basePath = rtrim($basePath, '/');
@@ -34,14 +25,14 @@ class URL
         }
 
         if (realpath($path)) {
-            return (!isset($vars['HTTPS']) || $vars['HTTPS'] != 'on' ?
+            return (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on' ?
                         'http://' :
                         'https://'
                 ) .
-                $vars['SERVER_NAME'] .
-                $vars['CONTEXT_PREFIX'] ?? '' .
+                $_SERVER['SERVER_NAME'] .
+                $_SERVER['CONTEXT_PREFIX'] ?? '' .
                 str_replace(
-                    $vars['CONTEXT_DOCUMENT_ROOT'] ?? '',
+                    $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?? '',
                     '',
                     $path
                 );
