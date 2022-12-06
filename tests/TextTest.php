@@ -94,4 +94,48 @@ class TextTest extends TestCase
             $this->assertEquals($expected, Text::pluralize($arg));
         }
     }
+
+    public function testIsVowel()
+    {
+        $values = [
+            'a' => true,
+            'b' => false,
+            'c' => false,
+            'd' => false,
+            'e' => true,
+            'f' => false,
+            'g' => false,
+            'h' => false,
+            'i' => true,
+            'j' => false,
+            'k' => false,
+            'l' => false,
+            'm' => false,
+            'n' => false,
+            'o' => true,
+            'p' => false,
+            'q' => false,
+            'r' => false,
+            's' => false,
+            't' => false,
+            'u' => true,
+            'v' => false,
+            'w' => false,
+            'x' => false,
+            'y' => true,
+            'z' => false,
+            '1' => false,
+            '2' => false,
+            ';' => false,
+            '#' => false
+        ];
+
+        foreach($values as $letter => $expected) {
+            $this->assertEquals($expected, Text::isVowel($letter));
+            $this->assertEquals($expected, Text::isVowel(strtoupper($letter)));
+        }
+
+        $this->assertFalse(Text::isVowel('y', false));
+        $this->assertFalse(Text::isVowel('Y', false));
+    }
 }

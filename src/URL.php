@@ -4,41 +4,13 @@ namespace Battis\DataUtilities;
 
 class URL
 {
-    /**
-     * Generate a URL from a path
-     *
-     * @param string $path A valid file path
-     * @param string|false $basePath The base path from which to start when
-     *                               processing a relative path.
-     * @return false|string The URL to that path, or `false` if the URL cannot
-     *     be computed (e.g. if run from CLI)
-     * @deprecated 1.1.2 No longer tested, and appears to be oriented towards
-     *     a particular version of Apache running on Ubuntu
-     */
-    public static function fromPath($path, $basePath = false)
+    public static function fromPath(string $path, ?string $base = null, string $separator = DIRECTORY_SEPARATOR): string
     {
-        global $_SERVER;
-
-        if ($basePath !== false && substr($path, 0, 1) !== '/') {
-            $basePath = rtrim($basePath, '/');
-            $path = realpath("$basePath/$path");
-        }
-
-        if (realpath($path)) {
-            return (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on' ?
-                        'http://' :
-                        'https://'
-                ) .
-                $_SERVER['SERVER_NAME'] .
-                $_SERVER['CONTEXT_PREFIX'] ?? '' .
-                str_replace(
-                    $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?? '',
-                    '',
-                    $path
-                );
-        } else {
-            return false;
-        }
+        $path = preg_replace("@$separator@", '/', Path::canonicalize($path, $base, $separator));
+        return
+            'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' .
+            $_SERVER['SERVER_NAME'] .
+            Path::canonicalize(preg_replace("@^{$_SERVER['DOCUMENT_ROOT']}@", '', $path), '/' . preg_replace('@^/@', '', $_SERVER['CONTEXT_PREFIX'] ?? ''), '/');
     }
 
     /**
