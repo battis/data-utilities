@@ -65,7 +65,7 @@ class Text
                 $words[$key] = strtoupper($word);
             } elseif (array_key_exists($word, $camelCaseWords)) {
                 $words[$key] = $camelCaseWords[$word];
-            } elseif ($key == 0 or !in_array($word, $lowerCaseWords)) {
+            } elseif ($key == 0 || !in_array($word, $lowerCaseWords)) {
                 $words[$key] = ucwords($word);
             }
         }
@@ -87,12 +87,8 @@ class Text
      * @param boolean $swap Attempt to swap `$a` and `$b` to find overlap. (default: `true`)
      * @return string Overlapping portion of `$a` and `$b`, `''` if no overlap
      */
-    public static function overlap($a, $b, $swap = true)
+    public static function overlap(string $a, string $b, $swap = true)
     {
-        if (!is_string($a) || !is_string($b)) {
-            return '';
-        }
-
         for ($i = 0; $i < strlen($a); $i++) {
             $overlap = true;
             for ($j = 0; $j < strlen($b) && $i + $j < strlen($a); $j++) {

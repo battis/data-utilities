@@ -49,18 +49,8 @@ class OverlapTests extends TestCase
     {
         $a = 'abcdef';
         $c = 'lmnop';
-        $d = new DateTime();
 
         // no overlap present
         $this->assertEquals('', Text::overlap($a, $c));
-    }
-
-    public function testNonstring()
-    {
-        $a = 'abcdef';
-        $d = new DateTime();
-
-        // non-string argument
-        $this->assertEquals('', Text::overlap($a, $d));
     }
 }
