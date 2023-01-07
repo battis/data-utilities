@@ -1,5 +1,7 @@
 .DS_Store
 /vendor
 /coverage
-.nova
+/.nova/*
+!/.nova/Artwork
+!/.nova/Configuration.json
 .phpunit.result.cache
