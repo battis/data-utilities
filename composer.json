@@ -24,5 +24,8 @@
     },
     "require": {
         "battis/hydratable": "^0.1"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
