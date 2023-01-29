@@ -1,6 +1,6 @@
 # DataUtilities
 
 [![Latest Version](https://img.shields.io/packagist/v/battis/data-utilities.svg)](https://packagist.org/packages/battis/data-utilities)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/battis/data-utilities/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/battis/data-utilities/?branch=master)
+[![codecov](https://codecov.io/gh/battis/data-utilities/branch/main/graph/badge.svg?token=D6U0OC0A5R)](https://codecov.io/gh/battis/data-utilities)
 
 A handful of useful helper functions to process data
