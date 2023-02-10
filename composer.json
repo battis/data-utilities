@@ -8,7 +8,6 @@
             "email": "sethbattis@stmarksschool.org"
         }
     ],
-    "minimum-stability": "dev",
     "require-dev": {
         "phpunit/phpunit": "^9.0"
     },
