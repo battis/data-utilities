@@ -6,7 +6,7 @@ use Battis\DataUtilities\Text;
 use PHPUnit\Framework\TestCase;
 use DateTime;
 
-class OverlapTests extends TestCase
+class OverlapTest extends TestCase
 {
 
     public function testOverlapLeftRight()
