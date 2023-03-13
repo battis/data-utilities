@@ -13,7 +13,7 @@ trait FixturePath
         if ($path === null) {
             $path = (new ReflectionClass(static::class))->getFileName();
             $path = preg_replace(
-                '@^(.*' . $this->ds() . 'tests)(' . $this->ds() . '.*)$$@',
+                '@^(.*' . DIRECTORY_SEPARATOR . 'tests)(' . DIRECTORY_SEPARATOR . '.*)$$@',
                 '$1' . DIRECTORY_SEPARATOR . 'Fixtures$2',
                 $path
             );
