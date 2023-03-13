@@ -4,6 +4,7 @@ namespace Battis\DataUtilities\PHPUnit;
 
 use ReflectionClass;
 
+// TODO does DIRECTORY_SEPARATOR need to be escaped in regex?
 trait FixturePath
 {
     private ?string $_fixturePath = null;
@@ -11,7 +12,11 @@ trait FixturePath
     protected function initFixturePath(string $path = null) {
         if ($path === null) {
             $path = (new ReflectionClass(static::class))->getFileName();
-            $path = preg_replace('@^(.*' . DIRECTORY_SEPARATOR . 'tests)(' . DIRECTORY_SEPARATOR . '.*)$$@', '$1/Fixtures$2', $path);
+            $path = preg_replace(
+                '@^(.*' . $this->ds() . 'tests)(' . $this->ds() . '.*)$$@',
+                '$1' . DIRECTORY_SEPARATOR . 'Fixtures$2',
+                $path
+            );
             $path = dirname($path) . DIRECTORY_SEPARATOR . basename($path, '.php');
         }
         $this->_fixturePath = $path;
