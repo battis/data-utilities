@@ -3,15 +3,16 @@
 namespace Battis\DataUtilities\Traits;
 
 /**
- * @template K
- * @template V
+ * @template TKey
+ * @template TInternal
+ * @template TExternal
  */
 trait IterableArray
 {
-    /** @var array<K, V> */
+    /** @var array<TKey, TInternal> */
     private ?array $iterable_array = null;
 
-    /** @var K[] */
+    /** @var TKey[] */
     private ?array $iterable_array_keys = null;
 
     protected function isIterableAs(array &$array): void
@@ -20,15 +21,38 @@ trait IterableArray
     }
 
     /**
-     * @return V
+     * @param TKey $offset
+     * @param TExternal $value
+     * @return TInternal
      */
-    public function current(): mixed
+    protected function hookSetValue(mixed $offset, mixed $value): mixed
     {
-        return $this->iterable_array[$this->key()];
+        return $value;
     }
 
     /**
-     * @return K
+     * @param TKey $offset
+     * @param TInternal $value
+     * @return TExternal
+     */
+    protected function hookGetValue(mixed $offset, mixed $value): mixed
+    {
+        return $value;
+    }
+
+    /**
+     * @return TExternal
+     */
+    public function current(): mixed
+    {
+        return $this->hookGetValue(
+            $this->key(),
+            $this->iterable_array[$this->key()]
+        );
+    }
+
+    /**
+     * @return TKey
      */
     public function key(): mixed
     {
@@ -57,26 +81,26 @@ trait IterableArray
     }
 
     /**
-     * @param K $offset
-     * @return V
+     * @param TKey $offset
+     * @return TExternal
      */
     public function offsetGet(mixed $offset): mixed
     {
-        return $this->iterable_array[$offset];
+        return $this->hookGetValue($offset, $this->iterable_array[$offset]);
     }
 
     /**
-     * @param K $offset
-     * @param V $value
+     * @param TKey $offset
+     * @param TExternal $value
      * @return void
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        $this->iterable_array[$offset] = $value;
+        $this->iterable_array[$offset] = $this->hookSetValue($offset, $value);
     }
 
     /**
-     * @param K $offset
+     * @param TKey $offset
      * @return void
      */
     public function offsetUnset(mixed $offset): void
