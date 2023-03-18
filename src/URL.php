@@ -22,7 +22,7 @@ class URL
      *     get_headers() documentation
      * @param string $url
      */
-    public static function exists($url)
+    public static function exists($url): bool
     {
         $headers = get_headers($url);
         return intval(substr($headers[0], 9, 3)) < 400;
