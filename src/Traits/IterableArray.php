@@ -14,7 +14,7 @@ trait IterableArray
     /** @var K[] */
     private ?array $iterable_array_keys = null;
 
-    protected function isIterableAs(&$array): void
+    protected function isIterableAs(array &$array): void
     {
         $this->iterable_array = &$array;
     }
