@@ -1,7 +1,6 @@
 .DS_Store
-/vendor
-/coverage
-/.nova/*
-!/.nova/Artwork
-!/.nova/Configuration.json
-.phpunit.*
+/.cache/
+/coverage/
+/docs/
+/tools/
+/vendor/
