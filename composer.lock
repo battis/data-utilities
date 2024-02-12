@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "battis/hydratable",
-            "version": "v0.1",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/battis/hydratable.git",
-                "reference": "b3f85b98f69691defc913104dac5e84a77da1fdd"
+                "reference": "a8ab2428b070dbe1f2143c7783898237727f3c79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/battis/hydratable/zipball/b3f85b98f69691defc913104dac5e84a77da1fdd",
-                "reference": "b3f85b98f69691defc913104dac5e84a77da1fdd",
+                "url": "https://api.github.com/repos/battis/hydratable/zipball/a8ab2428b070dbe1f2143c7783898237727f3c79",
+                "reference": "a8ab2428b070dbe1f2143c7783898237727f3c79",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Battis\\": "src"
+                    "Battis\\Hydratable\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -42,9 +42,9 @@
             "description": "Hydrate serialized objects with defaults and overrides",
             "support": {
                 "issues": "https://github.com/battis/hydratable/issues",
-                "source": "https://github.com/battis/hydratable/tree/v0.1"
+                "source": "https://github.com/battis/hydratable/tree/v0.1.1"
             },
-            "time": "2022-11-24T17:49:34+00:00"
+            "time": "2023-07-04T21:21:58+00:00"
         }
     ],
     "packages-dev": [],
@@ -55,5 +55,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
