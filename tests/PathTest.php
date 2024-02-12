@@ -15,7 +15,7 @@ class PathTest extends TestCase
             '/foo/bar/baz.slashes' => ['/foo/bar//baz.slashes'],
             '/foo/bar/baz.dot' => ['/foo/./bar/baz.dot'],
             '/baz.nest' => ['/foo/bar/../../baz.nest'],
-            '/argle/bargle/foo/bar/baz.txt' => ['/foo/bar/baz.txt', '/argle/bargle/'],
+            '/foo/bar/baz.txt' => ['/foo/bar/baz.txt', '/argle/bargle/'],
             '/argle/bargle/foo/bar/baz.unslash' => ['foo/bar/baz.unslash', '/argle/bargle'],
             '/argle/bar/baz.dots' => ['../foo/../bar/baz.dots', '/argle/bargle'],
             ':argle:bargle:foo:bar:baz.posix' => ['foo:bar:baz.posix', ':argle:bargle', ':'],
@@ -23,11 +23,28 @@ class PathTest extends TestCase
             '\argle\foo\baz.windows' => ['..\foo\bar\..\baz.windows', '\argle\bargle', '\\'],
             '/baz.lots' => ['/foo/bar/../../../../../../../../../../baz.lots', '/argle/bargle'],
             'argle/bargle/foo/bar/baz.rel' => ['foo/bar/baz.rel', 'argle/bargle'],
-            'baz.lots' => ['foo/bar/../../../../../../baz.lots']
+            'baz.lots' => ['foo/bar/../../../../../../baz.lots'],
         ];
 
         foreach ($values as $expected => $args) {
             $this->assertEquals($expected, Path::canonicalize(...$args));
+        }
+    }
+
+    public function testJoin()
+    {
+        $values = [
+            'a/b/c' => ['a','b','c'],
+            'd/e/f/' => ['d/', 'e/', 'f/'],
+            '/g/h/i' => ['/g','/h', '/i'],
+            '/l/m/n/o/' => ['/l', 'm/', '/n', 'o/'],
+            '/p/q/r/s/' => ['/p/', '/q/', '/r/', '/s/'],
+            't/u//v' => ['t', 'u//v'],
+            'w/../x/./y/z' => ['w', '../x', '.', 'y/', '/z'],
+        ];
+
+        foreach ($values as $expected => $args) {
+            $this->assertEquals($expected, Path::join(...$args));
         }
     }
 }

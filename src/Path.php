@@ -6,8 +6,11 @@ class Path
 {
     public static function canonicalize(string $path, ?string $base = null, string $separator = DIRECTORY_SEPARATOR): string
     {
-        $parts = explode($separator, ($base ?? '') . $separator . $path);
-        $canonical = [];
+        if (substr($path, 0, strlen($separator)) !== $separator & $base !== null) {
+            $path = $base . $separator . $path;
+        }
+        $parts = explode($separator, $path);
+        $canonicalParts = [];
         foreach($parts as $part) {
             switch ($part) {
                 case '.':
@@ -15,32 +18,39 @@ class Path
                     // skip
                     break;
                 case '..':
-                    $canonical = array_slice($canonical, 0, -1);
+                    $canonicalParts = array_slice($canonicalParts, 0, -1);
                     break;
                 default:
-                    $canonical[] = $part;
+                    $canonicalParts[] = $part;
             }
         }
-        return (($base === null && substr($path, 0, 1) === $separator) || ($base !== null  && substr($base, 0, 1) === $separator) ? $separator : '') . join($separator, $canonical);
+
+        return(substr($path, 0, strlen($separator)) === $separator ? $separator : '') . join($separator, $canonicalParts);
     }
 
     /**
      * Join path components together
      *
-     * @see https://stackoverflow.com/a/1091219/294171 StackOverflow comment
-     *
-     * @param string[] $args ￼
+     * @param string[]|array $args ￼
      *
      * @return string  ￼
      */
     public static function join(...$args): string
     {
+        $separator = DIRECTORY_SEPARATOR;
         $paths = [];
         foreach ($args as $arg) {
             $paths = array_merge($paths, (array) $arg);
         }
-        $paths = array_map(fn($p) => trim($p, "/"), $paths);
-        $paths = array_filter($paths);
-        return join('/', $paths);
+        $start = $paths[0];
+        $end = $paths [count($paths) - 1];
+        $paths = array_map(fn($part) => trim($part, $separator), $paths);
+        if (substr($start, 0, strlen($separator)) === $separator) {
+            $paths[0] = $separator . $paths[0];
+        }
+        if(substr($end, -strlen($separator)) === $separator) {
+            $paths[count($paths) - 1] = $paths[count($paths) - 1] . $separator;
+        }
+        return join($separator, $paths);
     }
 }

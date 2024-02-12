@@ -15,38 +15,38 @@ class URLTest extends TestCase
             'HTTPS' => 'on',
             'SERVER_NAME' => $host,
             'DOCUMENT_ROOT' => $docRoot,
-            'CONTEXT_PREFIX' => null
+            'CONTEXT_PREFIX' => null,
         ];
 
         $values = [
             [
                 [],
                 ["$docRoot/foo/bar/baz.html"],
-                "https://$host/foo/bar/baz.html"
+                "https://$host/foo/bar/baz.html",
             ],
             [
                 [],
                 ['../../baz.html', "$docRoot/foo/bar"],
-                "https://$host/baz.html"
+                "https://$host/baz.html",
             ],
             [
                 [
-                    'HTTPS' => 'off'
+                    'HTTPS' => 'off',
                 ],
-                ['/foo/bar/baz.html'],
-                "http://$host/foo/bar/baz.html"
+                ['/foo/bar/biz.html'],
+                "http://$host/foo/bar/biz.html",
             ],
             [
                 [
                     'DOCUMENT_ROOT' => '/home/alice/public_html',
-                    'CONTEXT_PREFIX' => '~alice/'
+                    'CONTEXT_PREFIX' => '~alice/',
                 ],
-                ['/home/alice/public_html/foo/bar/baz.html'],
-                "https://$host/~alice/foo/bar/baz.html"
-            ]
+                ['/home/alice/public_html/foo/bar/buz.html'],
+                "https://$host/~alice/foo/bar/buz.html",
+            ],
         ];
 
-        foreach($values as list($diff, $args, $expected)) {
+        foreach($values as [$diff, $args, $expected]) {
             $_SERVER = array_merge($server, $diff);
             $this->assertEquals($expected, URL::fromPath(...$args));
         }
