@@ -41,6 +41,9 @@ class PathTest extends TestCase
             '/p/q/r/s/' => ['/p/', '/q/', '/r/', '/s/'],
             't/u//v' => ['t', 'u//v'],
             'w/../x/./y/z' => ['w', '../x', '.', 'y/', '/z'],
+            'A/B/C/D/E' => [['A','B'],'C',['D', 'E']],
+            "F\\G\\H" => ["\\", ["F","G","H"]],
+            'fooIfooJfooKfooL/Mfoo' => ['foo', [['fooIfoo', 'fooJ'],'fooKfoo', ['L/Mfoo']]],
         ];
 
         foreach ($values as $expected => $args) {

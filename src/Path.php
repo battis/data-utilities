@@ -31,13 +31,23 @@ class Path
     /**
      * Join path components together
      *
-     * @param string[]|array $args ￼
+     * @param array{0: string, 1: array<string|string[]>}|array<string|string[]> $args
+     *   ```php
+     *   Path::join('a/', '/b', 'c/'); // "a/b/c/" -- de-dup separators
+     *   Path::join(['a/','/b'], '/c/'): // "a/b/c/" -- string or string[] parts
+     *   Path::join("\\", ['a', 'b', 'c']); // "a\\b\\c" -- separator as first argument, followed by array
+     *   Path::join("@@@", ['a', 'b', 'c']); // "a@@@b@@@c" -- arbitrary length separator
+     *   ```
      *
-     * @return string  ￼
+     * @return string
      */
     public static function join(...$args): string
     {
         $separator = DIRECTORY_SEPARATOR;
+        if (count($args) === 2 && is_string($args[0]) && is_array($args[1])) {
+            $separator = $args[0];
+            $args = $args[1];
+        }
         $paths = [];
         foreach ($args as $arg) {
             $paths = array_merge($paths, (array) $arg);
