@@ -22,12 +22,15 @@ class Filesystem
     if (!is_dir($path)) {
       return unlink($path);
     } elseif (is_dir($path)) {
-      foreach (scandir($path) as $item) {
-        if ($item !== "." && $item !== "..") {
-          Filesystem::recursiveDelete(Path::join($path, $item));
-        }
+      foreach (Filesystem::safeScandir($path) as $item) {
+        Filesystem::recursiveDelete(Path::join($path, $item));
       }
       return rmdir($path);
     }
+  }
+
+  public static function safeScandir(string $path)
+  {
+    return array_values(array_diff(scandir($path), [".", ".."]));
   }
 }
