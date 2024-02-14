@@ -29,7 +29,12 @@ class Filesystem
     }
   }
 
-  public static function safeScandir(string $path)
+  /**
+   * @param string $path
+   *
+   * @return string[]
+   */
+  public static function safeScandir(string $path): array
   {
     return array_values(array_diff(scandir($path), [".", ".."]));
   }
