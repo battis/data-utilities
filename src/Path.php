@@ -53,10 +53,10 @@ class Path
         foreach ($args as $arg) {
             $paths = array_merge($paths, (array) $arg);
         }
-        $paths = array_filter($paths, fn($p) => !empty($p));
+        $paths = array_values(array_filter($paths, fn($p) => !empty($p)));
         if (count($paths) > 0) {
             $start = $paths[0];
-            $end = $paths [count($paths) - 1];
+            $end = $paths[count($paths) - 1];
             $paths = array_map(fn($part) => trim($part, $separator), $paths);
             if (substr($start, 0, strlen($separator)) === $separator) {
                 $paths[0] = $separator . $paths[0];
