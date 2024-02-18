@@ -47,7 +47,8 @@ class PathTest extends TestCase
             "N/O/P" => ['N', null, 'O', null, null, 'P'],
             "Q/R/S" => ['Q', [], 'R', [], [], 'S'],
             "T/U/V" => ['T', null, 'U', [], 'V'],
-            "W\\X\\Y\\Z" => ["\\", [['W', 'X', null],[],['Y', 'Z', null]]]
+            "W\\X\\Y\\Z" => ["\\", [['W', 'X', null],[],['Y', 'Z', null]]],
+            "" => []
         ];
 
         foreach ($values as $expected => $args) {

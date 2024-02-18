@@ -54,15 +54,18 @@ class Path
             $paths = array_merge($paths, (array) $arg);
         }
         $paths = array_filter($paths, fn($p) => !empty($p));
-        $start = $paths[0];
-        $end = $paths [count($paths) - 1];
-        $paths = array_map(fn($part) => trim($part, $separator), $paths);
-        if (substr($start, 0, strlen($separator)) === $separator) {
-            $paths[0] = $separator . $paths[0];
+        if (count($paths) > 0) {
+            $start = $paths[0];
+            $end = $paths [count($paths) - 1];
+            $paths = array_map(fn($part) => trim($part, $separator), $paths);
+            if (substr($start, 0, strlen($separator)) === $separator) {
+                $paths[0] = $separator . $paths[0];
+            }
+            if(substr($end, -strlen($separator)) === $separator) {
+                $paths[count($paths) - 1] = $paths[count($paths) - 1] . $separator;
+            }
+            return join($separator, $paths);
         }
-        if(substr($end, -strlen($separator)) === $separator) {
-            $paths[count($paths) - 1] = $paths[count($paths) - 1] . $separator;
-        }
-        return join($separator, $paths);
+        return "";
     }
 }
