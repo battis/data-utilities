@@ -37,6 +37,7 @@ class Path
      *   Path::join(['a/','/b'], '/c/'): // "a/b/c/" -- string or string[] parts
      *   Path::join("\\", ['a', 'b', 'c']); // "a\\b\\c" -- separator as first argument, followed by array
      *   Path::join("@@@", ['a', 'b', 'c']); // "a@@@b@@@c" -- arbitrary length separator
+     *   Path::join('a', null, 'b', [], 'c'); // "'"a/b/c" -- nulls and empty arrays ignored
      *   ```
      *
      * @return string
@@ -52,6 +53,7 @@ class Path
         foreach ($args as $arg) {
             $paths = array_merge($paths, (array) $arg);
         }
+        $paths = array_filter($paths, fn($p) => !empty($p));
         $start = $paths[0];
         $end = $paths [count($paths) - 1];
         $paths = array_map(fn($part) => trim($part, $separator), $paths);
