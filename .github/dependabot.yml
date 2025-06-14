@@ -8,5 +8,5 @@ updates:
   - package-ecosystem: "composer"
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     target-branch: "dev"
